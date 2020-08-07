@@ -1,0 +1,81 @@
+<div>
+  <h3 mat-dialog-title>Action : <strong>{{modalData.mode}}</strong></h3>
+
+  <mat-dialog-content class="mat-typography">
+
+    <mat-form-field class="dialogValues">
+      <mat-label>Title</mat-label>
+      <input matInput [(ngModel)]="modalData.title">
+    </mat-form-field>
+
+    <mat-card class="card mx-auto">
+
+      <mat-card-header *ngIf="!createNewFlag">
+        <div mat-card-avatar class="header-image"></div>
+        <mat-card-title>{{modalData.title}}</mat-card-title>
+      </mat-card-header>
+
+      <div *ngIf="!createNewFlag">
+        <img mat-card-image [src]="modalData.url" [alt]="modalData.title" class="img-fluid">
+      </div>
+
+      <div *ngIf="createNewFlag">
+
+        <h3><strong>Add Photo</strong></h3>
+        <div ng2FileDrop [ngClass]="{'file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
+          mat-raised-button [uploader]="uploader" class="card bg-faded p-3 text-center mb-3 my-drop-zone">
+          <span class="material-icons"> add_to_photos </span> Drop Photos Here
+        </div>
+
+        <div>
+          <h3>Upload queue</h3>
+          <p>Queue length: {{ uploader?.queue?.length }}</p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="50%">Name</th>
+                <th>Size</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of uploader.queue">
+                <td><strong>{{ item?.file?.name }}</strong></td>
+                <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="progress mb-4">
+            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+          </div>
+        </div>
+
+        Multiple <br />
+        <input mat-raised-button type="file" ng2FileSelect [uploader]="uploader" multiple />
+        <br />
+        Single <br />
+        <input mat-raised-button type="file" ng2FileSelect [uploader]="uploader" />
+
+      </div>
+
+    </mat-card>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end">
+
+    <button mat-raised-button (click)="uploader.uploadAll()" color="primary" *ngIf="createNewFlag"
+      [disabled]="!uploader.getNotUploadedItems().length || !modalData.title">{{'Upload'| translate }}</button>
+
+    <button mat-raised-button color="warn" *ngIf="createNewFlag" (click)="uploader.clearQueue()"
+      [disabled]="!uploader.queue.length"> {{'Remove'| translate }} </button>
+
+    <button mat-raised-button (click)="doAction('update')" color="primary"
+      *ngIf="!createNewFlag">{{'Update'| translate }}</button>
+
+    <button mat-raised-button (click)="doAction('delete')" color="warn"
+      *ngIf="!createNewFlag">{{'Delete'| translate }}</button>
+
+    <button mat-stroked-button [mat-dialog-close]="true" (click)="closeDialog()" color="warn"
+      cdkFocusInitial>{{'Cancel'| translate }}</button>
+  </mat-dialog-actions>
+</div>

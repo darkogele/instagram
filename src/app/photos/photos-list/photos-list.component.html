@@ -1,0 +1,27 @@
+<div style="text-align:center">
+
+  <div>
+    <span class="topRow">
+      <h1> Welcome to {{ title }}! </h1>
+      <button mat-raised-button class="torRowbtn" color="accent" (click)="openDialog(null)">Upload Photo</button>
+    </span>
+  </div>
+
+  <div>
+    <cdk-virtual-scroll-viewport class="viewport" itemSize="550" minBufferPx="1200" maxBufferPx="1200">
+
+      <mat-card class="card mx-auto" *cdkVirtualFor="let photo of photoDataFromApi">
+        <mat-card-header>
+          <div mat-card-avatar class="header-image"></div>
+          <mat-card-title>{{photo.title}}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image [src]="photo.thumbnailUrl" [alt]="photo.title" class="img-thumbnail">
+
+        <mat-card-actions>
+          <button mat-stroked-button color="primary" (click)="openDialog(photo)">{{'EditMode' | translate }}</button>
+        </mat-card-actions>
+      </mat-card>
+
+    </cdk-virtual-scroll-viewport>
+  </div>
+</div>

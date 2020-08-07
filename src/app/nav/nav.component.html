@@ -1,0 +1,77 @@
+<!-- Top Meni  -->
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <span class="material-icons">
+        linked_camera
+      </span>
+    </button>
+    <a mat-button [routerLink]="'/home'">
+      <span class="app-logo"> {{ title | uppercase  }}</span>
+    </a>
+    <span class="menu-spacer"></span>
+    <div class="rightItems">
+
+      <button mat-button [routerLink]="'/home'">{{'Home' | translate}} </button>
+
+      <button mat-button [routerLink]="'/photos'"> {{'Photos' | translate}} </button>
+
+      <!-- Transalte Module -->
+      <button mat-button [matMenuTriggerFor]="translateMenu" matTooltip="Culture settings meni">
+        <mat-icon>language</mat-icon>
+      </button>
+      <mat-menu #translateMenu>
+        <button mat-menu-item *ngFor="let language of translate.getLangs()" (click)="switchLang(language)">
+          {{ language | uppercase }}
+        </button>
+      </mat-menu>
+
+      <!-- Menu Mode  -->
+      <button mat-button [matMenuTriggerFor]="sideMenu" matTooltip="Side meni options">
+        <span class="material-icons"> menu_open </span>
+      </button>
+      <mat-menu #sideMenu>
+        <button mat-menu-item *ngFor="let mode of menuModes" (click)="switchMenuMode(mode)">
+          {{ mode | titlecase}}
+        </button>
+      </mat-menu>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<!-- Side Meni -->
+<mat-sidenav-container>
+  <mat-sidenav #sidenav [mode]="mode" opened="'true'">
+    <mat-nav-list>
+
+      <mat-list-item class="navigation-item" [routerLink]="'/home'">
+        <span class="material-icons">home</span>&nbsp;{{'Home' | translate}}
+      </mat-list-item>
+
+      <mat-list-item class="navigation-item" [routerLink]="'/photos'">
+        <span class="material-icons">linked_camera</span>&nbsp;{{'Photos' | translate}}
+      </mat-list-item>
+
+      <mat-list-item class="navigation-item" (click)="sidenav.toggle()" href="" mat-list-item>
+        <span class="material-icons">close</span> &nbsp;{{'Close' | translate}}
+      </mat-list-item>
+    </mat-nav-list>
+
+    <!-- Show the version info -->
+    <mat-nav-list class="versionInfo">
+      <mat-list-item class="navigation-item" style="font-size: 13px; display: block">
+        <i class="material-icons app-logo">track_changes</i> &nbsp;
+        <span class="navigation-item-label"><strong>
+            {{ versionSpaInfo.name}}</strong> : {{ versionSpaInfo.version }}</span>
+
+      </mat-list-item>
+    </mat-nav-list>
+
+  </mat-sidenav>
+  <!-- Main Content  -->
+  <mat-sidenav-content>
+    <div style="height: 94vh; overflow: hidden;" class="bgImage">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

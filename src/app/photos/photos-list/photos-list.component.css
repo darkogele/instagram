@@ -1,0 +1,54 @@
+.card {
+  width: 450px;
+  height: 450px;
+  margin-bottom: 150px;
+}
+
+.topRow {
+  display: inline-flex;
+  padding-top: 1%
+}
+
+.torRowbtn {
+  right: 33px;
+  position: absolute;
+}
+
+/*
+.header-image {
+  background-size: cover;
+} */
+
+.container {
+  display: flex;
+  align-self: center;
+}
+
+.viewport {
+  height: 850px;
+  width: 100%;
+  border: 1px solid black;
+}
+
+.item {
+  height: 50px;
+}
+
+img {
+  width: 72%;
+}
+
+/* mat-card {
+  height: 200px;
+  margin: 2em;
+  background-color: #1B264F;
+  color: white;
+}
+
+.viewport {
+  height: 1400px;
+  width: 100%;
+  background: #fffffe;
+  margin: 2em 8em 8em;
+  box-shadow: 1px 1px 1px grey;
+} */

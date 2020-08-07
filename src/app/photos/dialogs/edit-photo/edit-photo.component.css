@@ -1,0 +1,16 @@
+.dialogValues {
+  min-width: 100%;
+}
+
+.mat-typography {
+  /* min-height: 72vh; */
+}
+
+img {
+  width: 100%;
+  margin: auto;
+}
+
+.file-over {
+  border: dotted 3px red;
+}
