@@ -7,5 +7,8 @@
   "No": "No",
   "Update": "Update",
   "Delete": "Delete",
-  "Cancel": "Cancel"
+  "Cancel": "Cancel",
+  "EnterTitle": "Enter a title",
+  "Action": "Action",
+  "Title": "Title"
 }

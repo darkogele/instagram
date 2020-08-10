@@ -1,11 +1,14 @@
 <div>
-  <h3 mat-dialog-title>Action : <strong>{{modalData.mode}}</strong></h3>
+  <h3 mat-dialog-title>{{'Action' | translate}} : <strong>{{modalData.mode}}</strong></h3>
 
   <mat-dialog-content class="mat-typography">
 
     <mat-form-field class="dialogValues">
-      <mat-label>Title</mat-label>
-      <input matInput [(ngModel)]="modalData.title">
+      <mat-label>{{'Title' | translate}}</mat-label>
+      <input matInput required [(ngModel)]="modalData.title">
+      <mat-error *ngIf="!modalData.title">
+        {{'EnterTitle' | translate}}
+      </mat-error>
     </mat-form-field>
 
     <mat-card class="card mx-auto">
@@ -69,7 +72,7 @@
     <button mat-raised-button color="warn" *ngIf="createNewFlag" (click)="uploader.clearQueue()"
       [disabled]="!uploader.queue.length"> {{'Remove'| translate }} </button>
 
-    <button mat-raised-button (click)="doAction('update')" color="primary"
+    <button mat-raised-button (click)="doAction('update')" color="primary" [disabled]=" !modalData.title"
       *ngIf="!createNewFlag">{{'Update'| translate }}</button>
 
     <button mat-raised-button (click)="doAction('delete')" color="warn"
